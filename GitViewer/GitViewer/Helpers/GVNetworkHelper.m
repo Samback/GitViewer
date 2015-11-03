@@ -11,6 +11,7 @@
 #import  "NSObject+AccessToken.h"
 #import <AFNetworking/AFNetworking.h>
 #import "Repository.h"
+#import "Subscriber.h"
 
 
 static NSString *const kTokenPath = @"https://github.com/login/oauth/access_token";
@@ -34,6 +35,7 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
     return sharedManager;
 }
 
+//https://developer.github.com/v3/#current-version
 - (void)configurateManager
 {
     self.manager = [AFHTTPRequestOperationManager manager];
@@ -43,8 +45,6 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
     [self.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [self.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 }
-
-
 
 //https://developer.github.com/v3/oauth/#github-redirects-back-to-your-site
 - (void)fetchOAuthTokenForCode:(NSString *)code withCompletionBlock:(CompletionBlock)completionBlock
@@ -66,21 +66,29 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
 }
 
 //https://developer.github.com/v3/oauth/#scopes
-//https://developer.github.com/v3/#current-version
-- (void)fetchRepositories
+- (void)fetchRepositoriesWithCompletionRepositoriesBlock:(CompletionRepositoriesBlock)completionRepositoriesBlock
 {
     NSString *tokenValue = [@"token " stringByAppendingString:self.accessToken];
     [self.manager.requestSerializer setValue:tokenValue forHTTPHeaderField:@"Authorization"];
-    
     [self.manager GET:kUserReposPath
            parameters:nil
               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                  NSLog(@"Repositories %@", [Repository fetchRepositoriesArrayFromJSON:responseObject]);
+                  completionRepositoriesBlock([Repository fetchRepositoriesArrayFromJSON:responseObject], nil);
               } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                  NSLog(@"Error %@", error);
+                  completionRepositoriesBlock(nil, error);
               }];
-    
 }
 
+
+- (void)fetchSubscribersAtPath:(NSString *)path withCompletionSubscribersBlock:(CompletionSubscribersBlock)completionSubscribersBlock
+{
+    [self.manager GET:path
+           parameters:nil
+              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                  completionSubscribersBlock([Subscriber fetchSubscribersArrayFromJSON:responseObject], nil);
+              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                  completionSubscribersBlock(nil, error);
+              }];
+}
 
 @end

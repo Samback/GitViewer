@@ -13,6 +13,8 @@
 		345741BA1BE8024D00EC9BA5 /* NSURL+CodeFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B91BE8024D00EC9BA5 /* NSURL+CodeFetch.m */; settings = {ASSET_TAGS = (); }; };
 		345741BD1BE802AA00EC9BA5 /* NSObject+AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741BC1BE802AA00EC9BA5 /* NSObject+AccessToken.m */; settings = {ASSET_TAGS = (); }; };
 		345741C01BE8C7A000EC9BA5 /* Repository.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741BF1BE8C7A000EC9BA5 /* Repository.m */; settings = {ASSET_TAGS = (); }; };
+		345741C41BE8DD5F00EC9BA5 /* Subscriber.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741C31BE8DD5F00EC9BA5 /* Subscriber.m */; settings = {ASSET_TAGS = (); }; };
+		345741C81BE8EA2B00EC9BA5 /* RepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741C71BE8EA2B00EC9BA5 /* RepositoryCell.m */; settings = {ASSET_TAGS = (); }; };
 		34BAED541BE78E7000E47894 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BAED531BE78E7000E47894 /* main.m */; };
 		34BAED571BE78E7000E47894 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BAED561BE78E7000E47894 /* AppDelegate.m */; };
 		34BAED5D1BE78E7000E47894 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34BAED5B1BE78E7000E47894 /* Main.storyboard */; };
@@ -47,6 +49,10 @@
 		345741BC1BE802AA00EC9BA5 /* NSObject+AccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+AccessToken.m"; path = "Categories/NSObject+AccessToken.m"; sourceTree = "<group>"; };
 		345741BE1BE8C7A000EC9BA5 /* Repository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Repository.h; path = Models/Repository.h; sourceTree = "<group>"; };
 		345741BF1BE8C7A000EC9BA5 /* Repository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Repository.m; path = Models/Repository.m; sourceTree = "<group>"; };
+		345741C21BE8DD5F00EC9BA5 /* Subscriber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Subscriber.h; path = Models/Subscriber.h; sourceTree = "<group>"; };
+		345741C31BE8DD5F00EC9BA5 /* Subscriber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Subscriber.m; path = Models/Subscriber.m; sourceTree = "<group>"; };
+		345741C61BE8EA2B00EC9BA5 /* RepositoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoryCell.h; path = Repositories/RepositoryCell.h; sourceTree = "<group>"; };
+		345741C71BE8EA2B00EC9BA5 /* RepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RepositoryCell.m; path = Repositories/RepositoryCell.m; sourceTree = "<group>"; };
 		34BAED4F1BE78E7000E47894 /* GitViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34BAED531BE78E7000E47894 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		34BAED551BE78E7000E47894 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 		345741AF1BE7F44800EC9BA5 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				345741C51BE8E9E300EC9BA5 /* Cells */,
 				345741B01BE7F48300EC9BA5 /* UserRepositoriesVC.h */,
 				345741B11BE7F48300EC9BA5 /* UserRepositoriesVC.m */,
 			);
@@ -124,8 +131,19 @@
 			children = (
 				345741BE1BE8C7A000EC9BA5 /* Repository.h */,
 				345741BF1BE8C7A000EC9BA5 /* Repository.m */,
+				345741C21BE8DD5F00EC9BA5 /* Subscriber.h */,
+				345741C31BE8DD5F00EC9BA5 /* Subscriber.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		345741C51BE8E9E300EC9BA5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				345741C61BE8EA2B00EC9BA5 /* RepositoryCell.h */,
+				345741C71BE8EA2B00EC9BA5 /* RepositoryCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		34BAED461BE78E7000E47894 = {
@@ -349,6 +367,8 @@
 				34BAED541BE78E7000E47894 /* main.m in Sources */,
 				345741B21BE7F48300EC9BA5 /* UserRepositoriesVC.m in Sources */,
 				345741B51BE7F98D00EC9BA5 /* GVNetworkHelper.m in Sources */,
+				345741C41BE8DD5F00EC9BA5 /* Subscriber.m in Sources */,
+				345741C81BE8EA2B00EC9BA5 /* RepositoryCell.m in Sources */,
 				345741BD1BE802AA00EC9BA5 /* NSObject+AccessToken.m in Sources */,
 				345741C01BE8C7A000EC9BA5 /* Repository.m in Sources */,
 			);

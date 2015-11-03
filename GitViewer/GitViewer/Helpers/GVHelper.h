@@ -10,6 +10,7 @@
 
 extern NSString *const kClientID;
 extern NSString *const kClientSecretID;
+extern NSString *const nRecivedCodeAfterLoginNotification;
 
 @interface GVHelper : NSObject
 
