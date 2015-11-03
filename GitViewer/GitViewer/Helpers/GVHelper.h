@@ -13,5 +13,5 @@ extern NSString *const kClientSecretID;
 extern NSString *const nRecivedCodeAfterLoginNotification;
 
 @interface GVHelper : NSObject
-
++ (void)callForInitialAuthorizeAtGitHub;
 @end

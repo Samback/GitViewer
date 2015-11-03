@@ -16,6 +16,8 @@
 #import "CustomRepositoryVC.h"
 
 static  NSString *repositoryCellIdentifier = @"RepositoryCell";
+static  NSString *sCustomRepositoryVCSegue = @"CustomRepositoryVCSegue";
+static  CGFloat repositoryCellHeight = 58.0;
 
 @interface UserRepositoriesVC () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSArray<Repository*> *repositories;
@@ -59,24 +61,6 @@ static  NSString *repositoryCellIdentifier = @"RepositoryCell";
     // Do any additional setup after loading the view.
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSString *path = [NSString stringWithFormat:@"https://github.com/login/oauth/authorize?client_id=%@&scope=repo&state=TEST_STATE", kClientID];
-        
-        if (path) {
-            NSURL *urlPath = [NSURL URLWithString:path];
-            if ([[UIApplication sharedApplication] canOpenURL:urlPath]) {
-                [[UIApplication sharedApplication] openURL:urlPath];
-            }
-        }
-    });
-    
-    
-}
-
 - (void)recivedNotificationWithCode:(NSNotification *)notification
 {
     if ([notification.object isKindOfClass:[NSURL class]]) {
@@ -98,7 +82,7 @@ static  NSString *repositoryCellIdentifier = @"RepositoryCell";
 #pragma mark - UITableViewDelegate 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 58.0;
+    return repositoryCellHeight;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -124,9 +108,11 @@ static  NSString *repositoryCellIdentifier = @"RepositoryCell";
     return cell;
 }
 
+#pragma mark - Segue connection
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"CustomRepositoryVCSegue"] && [sender isKindOfClass:[UITableViewCell class]]) {
+    if ([segue.identifier isEqualToString:sCustomRepositoryVCSegue] && [sender isKindOfClass:[UITableViewCell class]]) {
         CustomRepositoryVC *customRepositoryVC = (CustomRepositoryVC *)segue.destinationViewController;
         NSInteger rowID = [self.tableView indexPathForCell:(UITableViewCell *)sender].row;
         Repository *repository =  self.repositories[rowID];

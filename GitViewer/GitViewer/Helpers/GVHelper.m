@@ -7,10 +7,24 @@
 //
 
 #import "GVHelper.h"
+#import "AppDelegate.h"
 
 NSString *const kClientID = @"6ef19636b8f523ec532d";
 NSString *const kClientSecretID = @"e1ea12767019182c8db931a14e2ab9010f90aad8";
 NSString *const nRecivedCodeAfterLoginNotification = @"StartAuthentificationProcess";
+
+
 @implementation GVHelper
++ (void)callForInitialAuthorizeAtGitHub
+{
+    NSString *path = [NSString stringWithFormat:@"https://github.com/login/oauth/authorize?client_id=%@&scope=repo&state=TEST_STATE", kClientID];
+    if (path) {
+        NSURL *urlPath = [NSURL URLWithString:path];
+        if ([[UIApplication sharedApplication] canOpenURL:urlPath]) {
+            [[UIApplication sharedApplication] openURL:urlPath];
+        }
+    }
+}
+
 
 @end
