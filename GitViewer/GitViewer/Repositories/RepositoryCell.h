@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Repository;
 
 @interface RepositoryCell : UITableViewCell
+
+- (void)fillCellWithInfo:(Repository *)repository;
 
 @end
