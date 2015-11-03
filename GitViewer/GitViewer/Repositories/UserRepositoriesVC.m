@@ -7,17 +7,43 @@
 //
 
 #import "UserRepositoriesVC.h"
+#import "RepositoryCell.h"
 #import "GVHelper.h"
 #import "GVNetworkHelper.h"
+#import "NSURL+CodeFetch.h"
 
 @interface UserRepositoriesVC ()
-
+@property (nonatomic, strong) NSArray<Repository*> *repositories;
 @end
 
 @implementation UserRepositoriesVC
 
+#pragma mark - Lazy instantiation
+
+- (NSArray <Repository *> *)repositories
+{
+    if (!_repositories) {
+        _repositories = @[];
+    }
+    return _repositories;
+}
+
+- (void)addObjectsAtRepositoriesFromArray:(NSArray <Repository *> *)repositories
+{
+    NSMutableArray *updatedRepositories = [NSMutableArray arrayWithArray:self.repositories];
+    [updatedRepositories addObjectsFromArray:repositories];
+    self.repositories = [updatedRepositories copy];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(recivedNotificationWithCode:)
+                                                 name:nRecivedCodeAfterLoginNotification
+                                               object:nil];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -34,6 +60,28 @@
     }
     
 }
+
+- (void)recivedNotificationWithCode:(NSNotification *)notification
+{
+    if ([notification.object isKindOfClass:[NSURL class]]) {
+        NSURL * url = (NSURL *)notification.object;
+        NSString *code = [url fetchCodeFromURL];
+        UserRepositoriesVC *__weak weakSelf = self;
+        [[GVNetworkHelper sharedManager] fetchOAuthTokenForCode:code withCompletionBlock:^(NSError *error) {
+            if (!error) {
+                [[GVNetworkHelper sharedManager] fetchRepositoriesWithCompletionRepositoriesBlock:^(NSArray<Repository *> *repositories, NSError *error) {
+                    if (!error) {
+                         [weakSelf addObjectsAtRepositoriesFromArray:repositories];
+                    }                   
+                }];
+            }
+        }];
+    }
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

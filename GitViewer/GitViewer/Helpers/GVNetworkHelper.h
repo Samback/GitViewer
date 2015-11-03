@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-@class  Repository;
+@class Repository;
+@class Subscriber;
 
 
 typedef void (^CompletionBlock)(NSError *error);
 typedef void (^CompletionRepositoriesBlock)(NSArray <Repository *> * repositories, NSError *error);
+typedef void (^CompletionSubscribersBlock)(NSArray <Subscriber *> * subscribers, NSError *error);
 
 @interface GVNetworkHelper : NSObject
 @property (nonatomic, readonly) NSString *accessToken;
 
 + (instancetype)sharedManager;
 - (void)fetchOAuthTokenForCode:(NSString *)code withCompletionBlock:(CompletionBlock)completionBlock;
-- (void)fetchRepositories;
+- (void)fetchRepositoriesWithCompletionRepositoriesBlock:(CompletionRepositoriesBlock)completionRepositoriesBlock;
+- (void)fetchSubscribersAtPath:(NSString *) path withCompletionSubscribersBlock:(CompletionSubscribersBlock)completionSubscribersBlock;
 @end

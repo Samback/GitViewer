@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "GVNetworkHelper.h"
-#import "NSURL+CodeFetch.h"
+
+#import "GVHelper.h"
 
 @interface AppDelegate ()
 
@@ -30,14 +31,9 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
 {
-    NSString *code = [url fetchCodeFromURL];
-    NSLog(@"URL iOS 9 %@ and options %@", url, code);
     
-    [[GVNetworkHelper sharedManager] fetchOAuthTokenForCode:code withCompletionBlock:^(NSError *error) {
-        if (!error) {
-            [[GVNetworkHelper sharedManager] fetchRepositories];
-        }
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:nRecivedCodeAfterLoginNotification
+                                                        object:url];
     return YES;
 }
 
