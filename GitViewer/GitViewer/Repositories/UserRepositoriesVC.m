@@ -11,7 +11,9 @@
 #import "GVHelper.h"
 #import "GVNetworkHelper.h"
 #import "NSURL+CodeFetch.h"
-#import "RepositoryCell.h"
+#import "UITableView+ConfigurateSeparator.h"
+#import "Repository.h"
+#import "CustomRepositoryVC.h"
 
 static  NSString *repositoryCellIdentifier = @"RepositoryCell";
 
@@ -60,14 +62,18 @@ static  NSString *repositoryCellIdentifier = @"RepositoryCell";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSString *path = [NSString stringWithFormat:@"https://github.com/login/oauth/authorize?client_id=%@&scope=repo&state=TEST_STATE", kClientID];
-    
-    if (path) {
-        NSURL *urlPath = [NSURL URLWithString:path];
-        if ([[UIApplication sharedApplication] canOpenURL:urlPath]) {
-            [[UIApplication sharedApplication] openURL:urlPath];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *path = [NSString stringWithFormat:@"https://github.com/login/oauth/authorize?client_id=%@&scope=repo&state=TEST_STATE", kClientID];
+        
+        if (path) {
+            NSURL *urlPath = [NSURL URLWithString:path];
+            if ([[UIApplication sharedApplication] canOpenURL:urlPath]) {
+                [[UIApplication sharedApplication] openURL:urlPath];
+            }
         }
-    }
+    });
+    
     
 }
 
@@ -105,24 +111,11 @@ static  NSString *repositoryCellIdentifier = @"RepositoryCell";
     return self.repositories.count;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
-    
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView configurateSeparatorForCell:cell];
     if ([cell isKindOfClass:[RepositoryCell class]]) {
         [(RepositoryCell *)cell fillCellWithInfo:[self.repositories objectAtIndex:indexPath.row]];
     }
-    
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,7 +124,26 @@ static  NSString *repositoryCellIdentifier = @"RepositoryCell";
     return cell;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"CustomRepositoryVCSegue"] && [sender isKindOfClass:[UITableViewCell class]]) {
+        CustomRepositoryVC *customRepositoryVC = (CustomRepositoryVC *)segue.destinationViewController;
+        NSInteger rowID = [self.tableView indexPathForCell:(UITableViewCell *)sender].row;
+        Repository *repository =  self.repositories[rowID];
+        [customRepositoryVC configurateVCWithName:repository.name
+                             usingSubscribersPath:repository.subscribersURL];
+    }
+    
+}
 
+#pragma mark - Memory Part
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:nRecivedCodeAfterLoginNotification
+                                                  object:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
