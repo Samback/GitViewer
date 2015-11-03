@@ -19,6 +19,17 @@
 @end
 
 @implementation Repository
++ (NSArray <Repository *> *)fetchRepositoriesArrayFromJSON:(id)json;
+{
+    NSMutableArray *repositories = @[].mutableCopy;
+    if ([json isKindOfClass:[NSArray class]]) {
+        NSArray *jsonArray = (NSArray *)json;
+        [jsonArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [repositories insertObject:[Repository initRepositoryFromDictionary:obj] atIndex:idx];
+        }];
+    }
+    return repositories;
+}
 
 + (instancetype)initRepositoryFromDictionary:(NSDictionary *)dictionary
 {

@@ -16,5 +16,6 @@
 @property (nonatomic, readonly, copy) NSString *forksCount;
 @property (nonatomic, readonly, copy) NSString *subscribersURL;
 
-+ (instancetype)initRepositoryFromDictionary:(NSDictionary *)dictionary;
++ (NSArray <Repository *> *)fetchRepositoriesArrayFromJSON:(id)json;
+
 @end

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class  Repository;
+
 
 typedef void (^CompletionBlock)(NSError *error);
+typedef void (^CompletionRepositoriesBlock)(NSArray <Repository *> * repositories, NSError *error);
 
 @interface GVNetworkHelper : NSObject
 @property (nonatomic, readonly) NSString *accessToken;

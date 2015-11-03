@@ -10,6 +10,8 @@
 #import "GVHelper.h"
 #import  "NSObject+AccessToken.h"
 #import <AFNetworking/AFNetworking.h>
+#import "Repository.h"
+
 
 static NSString *const kTokenPath = @"https://github.com/login/oauth/access_token";
 static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
@@ -63,26 +65,22 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
     }
 }
 
-
 //https://developer.github.com/v3/oauth/#scopes
+//https://developer.github.com/v3/#current-version
 - (void)fetchRepositories
-{   
+{
     NSString *tokenValue = [@"token " stringByAppendingString:self.accessToken];
     [self.manager.requestSerializer setValue:tokenValue forHTTPHeaderField:@"Authorization"];
     
     [self.manager GET:kUserReposPath
            parameters:nil
               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                  NSLog(@"Repos %@", responseObject);
+                  NSLog(@"Repositories %@", [Repository fetchRepositoriesArrayFromJSON:responseObject]);
               } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                   NSLog(@"Error %@", error);
               }];
     
 }
-
-
-//https://developer.github.com/v3/#current-version
-
 
 
 @end
