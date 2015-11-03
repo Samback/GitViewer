@@ -30,7 +30,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JGJ-HN-JNm">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="octocat" translatesAutoresizingMaskIntoConstraints="NO" id="JGJ-HN-JNm">
                                                     <rect key="frame" x="5" y="6" width="43.5" height="43.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -163,4 +163,7 @@
             <point key="canvasLocation" x="236" y="305"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="octocat" width="50" height="50"/>
+    </resources>
 </document>
