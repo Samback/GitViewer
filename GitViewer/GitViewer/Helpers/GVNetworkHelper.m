@@ -62,11 +62,13 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
                                      @"code" : code};
         
         [self.manager POST:kTokenPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
+            NSError *error = [responseObject fetchErrorFromDictionary];
+            if (error) {
+                completionBlock(error);
+            }
             [GVKeyChain sharedManager].accessToken = [responseObject fetchAuthTokenFromDictionary];
             completionBlock(nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
             [GVKeyChain sharedManager].accessToken = nil;
             completionBlock(error);
         }];
@@ -93,10 +95,26 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                   completionRepositoriesBlock([Repository fetchRepositoriesArrayFromJSON:responseObject], nil);
               } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                  completionRepositoriesBlock(nil, error);
+                  if([GVNetworkHelper checkIsUserNotAuthorizedBasedOnError:error]){
+                      [GVHelper callForInitialAuthorizeAtGitHub];
+                  } else {
+                      completionRepositoriesBlock(nil, error);
+                  }
               }];
 }
 
++ (BOOL)checkIsUserNotAuthorizedBasedOnError:(NSError *)error
+{
+    if ([error userInfo]) {
+        NSHTTPURLResponse *response = [error userInfo][@"com.alamofire.serialization.response.error.response"];
+        if (response) {
+            if (response.statusCode == 401) {
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
 
 - (void)fetchSubscribersAtPath:(NSString *)path withCompletionSubscribersBlock:(CompletionSubscribersBlock)completionSubscribersBlock
 {
@@ -105,7 +123,12 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                   completionSubscribersBlock([Subscriber fetchSubscribersArrayFromJSON:responseObject], nil);
               } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                  completionSubscribersBlock(nil, error);
+                  if([GVNetworkHelper checkIsUserNotAuthorizedBasedOnError:error]){
+                      [GVHelper callForInitialAuthorizeAtGitHub];
+                  } else {
+                      completionSubscribersBlock(nil, error);
+                  }
+                  
               }];
 }
 

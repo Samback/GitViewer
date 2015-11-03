@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (AccessToken)
+- (NSError *)fetchErrorFromDictionary;
 - (NSString *)fetchAuthTokenFromDictionary;
 @end

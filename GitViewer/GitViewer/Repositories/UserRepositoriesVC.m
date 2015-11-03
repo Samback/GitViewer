@@ -94,6 +94,14 @@ static  CGFloat repositoryCellHeight = 58.0;
     [[GVNetworkHelper sharedManager] fetchRepositoriesWithCompletionRepositoriesBlock:^(NSArray<Repository *> *repositories, NSError *error) {
         if (!error) {
             [weakSelf addObjectsAtRepositoriesFromArray:repositories];
+        } else if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[[UIAlertView alloc] initWithTitle:@"Warning"
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles: nil] show];
+            });           
         }
     }];
 }
