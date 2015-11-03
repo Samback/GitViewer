@@ -57,8 +57,8 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
 {
     NSString *code = [GVKeyChain sharedManager].code;
     if (code) {
-        NSDictionary *parameters = @{@"client_id" : kClientID,
-                                     @"client_secret" : kClientSecretID,
+        NSDictionary *parameters = @{@"client_id" : [GVKeyChain sharedManager].clientID,
+                                     @"client_secret" : [GVKeyChain sharedManager].clientSecretID,
                                      @"code" : code};
         
         [self.manager POST:kTokenPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {

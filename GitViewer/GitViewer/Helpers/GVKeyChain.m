@@ -20,17 +20,27 @@ static NSString * const kCodeTokenKey = @"codeTokenKey";
 
 @implementation GVKeyChain
 
-
 + (instancetype)sharedManager
 {
     static GVKeyChain *sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedManager = [[self alloc] init];
-        NSLog(@"Bundle id %@", [[NSBundle mainBundle] bundleIdentifier]);
         sharedManager.keychain = [UICKeyChainStore keyChainStore];
+        sharedManager.keychain[@"clientID"] = @"6ef19636b8f523ec532d";
+        sharedManager.keychain[@"clientSecretID"] = @"e1ea12767019182c8db931a14e2ab9010f90aad8";
     });
     return sharedManager;
+}
+
+- (NSString *)clientID
+{
+    return self.keychain[@"clientID"];
+}
+
+- (NSString *)clientSecretID
+{
+     return self.keychain[@"clientSecretID"];
 }
 
 - (void)setAccessToken:(NSString *)accessToken
