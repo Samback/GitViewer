@@ -8,6 +8,7 @@
 
 #import "UserRepositoriesVC.h"
 #import "GVHelper.h"
+#import "GVNetworkHelper.h"
 
 @interface UserRepositoriesVC ()
 

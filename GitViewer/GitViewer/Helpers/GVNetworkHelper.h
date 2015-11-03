@@ -15,4 +15,5 @@ typedef void (^CompletionBlock)(NSError *error);
 
 + (instancetype)sharedManager;
 - (void)fetchOAuthTokenForCode:(NSString *)code withCompletionBlock:(CompletionBlock)completionBlock;
+- (void)fetchRepositories;
 @end

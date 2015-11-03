@@ -12,9 +12,11 @@
 #import <AFNetworking/AFNetworking.h>
 
 static NSString *const kTokenPath = @"https://github.com/login/oauth/access_token";
+static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
 
 @interface GVNetworkHelper ()
 @property (nonatomic, readwrite) NSString *accessToken;
+@property (nonatomic, strong)  AFHTTPRequestOperationManager *manager;
 @end
 
 @implementation GVNetworkHelper
@@ -25,8 +27,19 @@ static NSString *const kTokenPath = @"https://github.com/login/oauth/access_toke
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedManager = [[self alloc] init];
+        [sharedManager configurateManager];
     });
     return sharedManager;
+}
+
+- (void)configurateManager
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [self.manager.requestSerializer setValue:@"application/vnd.github.v3+json" forHTTPHeaderField:@"Accept"];
+    [self.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [self.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 }
 
 
@@ -39,16 +52,7 @@ static NSString *const kTokenPath = @"https://github.com/login/oauth/access_toke
                                      @"client_secret" : kClientSecretID,
                                      @"code" : code};
         
-        
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        
-        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
-        [manager POST:kTokenPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {            
+        [self.manager POST:kTokenPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             self.accessToken = [responseObject fetchAuthTokenFromDictionary];
             completionBlock(nil);
@@ -62,19 +66,22 @@ static NSString *const kTokenPath = @"https://github.com/login/oauth/access_toke
 
 //https://developer.github.com/v3/oauth/#scopes
 - (void)fetchRepositories
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+{   
     NSString *tokenValue = [@"token " stringByAppendingString:self.accessToken];
-    [manager.requestSerializer setValue:tokenValue forHTTPHeaderField:@"Authorization"];
+    [self.manager.requestSerializer setValue:tokenValue forHTTPHeaderField:@"Authorization"];
     
+    [self.manager GET:kUserReposPath
+           parameters:nil
+              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                  NSLog(@"Repos %@", responseObject);
+              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                  NSLog(@"Error %@", error);
+              }];
     
-    
-
 }
 
+
+//https://developer.github.com/v3/#current-version
 
 
 
