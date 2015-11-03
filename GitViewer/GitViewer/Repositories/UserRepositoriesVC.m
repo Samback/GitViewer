@@ -7,13 +7,16 @@
 //
 
 #import "UserRepositoriesVC.h"
+#import "CustomRepositoryVC.h"
 #import "RepositoryCell.h"
+#import "Repository.h"
+
 #import "GVHelper.h"
 #import "GVNetworkHelper.h"
+#import "GVKeyChain.h"
+
 #import "NSURL+CodeFetch.h"
 #import "UITableView+ConfigurateSeparator.h"
-#import "Repository.h"
-#import "CustomRepositoryVC.h"
 
 static  NSString *repositoryCellIdentifier = @"RepositoryCell";
 static  NSString *sCustomRepositoryVCSegue = @"CustomRepositoryVCSegue";
@@ -47,9 +50,15 @@ static  CGFloat repositoryCellHeight = 58.0;
 }
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (![GVKeyChain sharedManager].accessToken) {
+        [GVHelper callForInitialAuthorizeAtGitHub];
+    } else {
+        [self fetchRepositories];
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(recivedNotificationWithCode:)
                                                  name:nRecivedCodeAfterLoginNotification
@@ -65,21 +74,31 @@ static  CGFloat repositoryCellHeight = 58.0;
 {
     if ([notification.object isKindOfClass:[NSURL class]]) {
         NSURL * url = (NSURL *)notification.object;
-        NSString *code = [url fetchCodeFromURL];
-        UserRepositoriesVC *__weak weakSelf = self;
-        [[GVNetworkHelper sharedManager] fetchOAuthTokenForCode:code withCompletionBlock:^(NSError *error) {
-            if (!error) {
-                [[GVNetworkHelper sharedManager] fetchRepositoriesWithCompletionRepositoriesBlock:^(NSArray<Repository *> *repositories, NSError *error) {
-                    if (!error) {
-                         [weakSelf addObjectsAtRepositoriesFromArray:repositories];
-                    }                   
-                }];
-            }
-        }];
+        [GVKeyChain sharedManager].code = [url fetchCodeFromURL];
+    } else if (![GVKeyChain sharedManager].code )
+    {
+        [GVHelper callForInitialAuthorizeAtGitHub];
+        return;
     }
+    UserRepositoriesVC *__weak weakSelf = self;
+    [[GVNetworkHelper sharedManager] fetchOAuthTokenWithCompletionBlock:^(NSError *error) {
+        if (!error) {
+            [weakSelf fetchRepositories];
+        }
+    }];
 }
 
-#pragma mark - UITableViewDelegate 
+- (void)fetchRepositories
+{
+    UserRepositoriesVC *__weak weakSelf = self;
+    [[GVNetworkHelper sharedManager] fetchRepositoriesWithCompletionRepositoriesBlock:^(NSArray<Repository *> *repositories, NSError *error) {
+        if (!error) {
+            [weakSelf addObjectsAtRepositoriesFromArray:repositories];
+        }
+    }];
+}
+
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return repositoryCellHeight;

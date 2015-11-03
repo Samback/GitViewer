@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		343CFB211BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CFB201BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m */; settings = {ASSET_TAGS = (); }; };
+		343CFB241BE9577B00FEC954 /* GVKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CFB231BE9577B00FEC954 /* GVKeyChain.m */; settings = {ASSET_TAGS = (); }; };
 		345741AE1BE7EFD600EC9BA5 /* GVHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741AD1BE7EFD600EC9BA5 /* GVHelper.m */; settings = {ASSET_TAGS = (); }; };
 		345741B21BE7F48300EC9BA5 /* UserRepositoriesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B11BE7F48300EC9BA5 /* UserRepositoriesVC.m */; settings = {ASSET_TAGS = (); }; };
 		345741B51BE7F98D00EC9BA5 /* GVNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B41BE7F98D00EC9BA5 /* GVNetworkHelper.m */; settings = {ASSET_TAGS = (); }; };
@@ -41,6 +42,8 @@
 		2DD4BE7DC85EA4C4B2B09DAC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		343CFB1F1BE90D6300FEC954 /* UITableView+ConfigurateSeparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+ConfigurateSeparator.h"; path = "Categories/UITableView+ConfigurateSeparator.h"; sourceTree = "<group>"; };
 		343CFB201BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+ConfigurateSeparator.m"; path = "Categories/UITableView+ConfigurateSeparator.m"; sourceTree = "<group>"; };
+		343CFB221BE9577B00FEC954 /* GVKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GVKeyChain.h; path = Helpers/GVKeyChain.h; sourceTree = "<group>"; };
+		343CFB231BE9577B00FEC954 /* GVKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GVKeyChain.m; path = Helpers/GVKeyChain.m; sourceTree = "<group>"; };
 		345741AC1BE7EFD600EC9BA5 /* GVHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GVHelper.h; path = Helpers/GVHelper.h; sourceTree = "<group>"; };
 		345741AD1BE7EFD600EC9BA5 /* GVHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GVHelper.m; path = Helpers/GVHelper.m; sourceTree = "<group>"; };
 		345741B01BE7F48300EC9BA5 /* UserRepositoriesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserRepositoriesVC.h; path = Repositories/UserRepositoriesVC.h; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 				345741AD1BE7EFD600EC9BA5 /* GVHelper.m */,
 				345741B31BE7F98D00EC9BA5 /* GVNetworkHelper.h */,
 				345741B41BE7F98D00EC9BA5 /* GVNetworkHelper.m */,
+				343CFB221BE9577B00FEC954 /* GVKeyChain.h */,
+				343CFB231BE9577B00FEC954 /* GVKeyChain.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				343CFB241BE9577B00FEC954 /* GVKeyChain.m in Sources */,
 				345741CF1BE8FFA700EC9BA5 /* CustomRepositoryVC.m in Sources */,
 				34BAED571BE78E7000E47894 /* AppDelegate.m in Sources */,
 				345741AE1BE7EFD600EC9BA5 /* GVHelper.m in Sources */,

@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "GVNetworkHelper.h"
-
 #import "GVHelper.h"
 
 @interface AppDelegate ()
@@ -20,12 +19,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch
+    
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    NSLog(@"URL %@", url);
+    [[NSNotificationCenter defaultCenter] postNotificationName:nRecivedCodeAfterLoginNotification
+                                                        object:url];
     return YES;
 }
 

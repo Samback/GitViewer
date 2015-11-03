@@ -19,7 +19,9 @@ typedef void (^CompletionSubscribersBlock)(NSArray <Subscriber *> * subscribers,
 @property (nonatomic, readonly) NSString *accessToken;
 
 + (instancetype)sharedManager;
-- (void)fetchOAuthTokenForCode:(NSString *)code withCompletionBlock:(CompletionBlock)completionBlock;
+
+- (void)updateAuthorizationHeader;
+- (void)fetchOAuthTokenWithCompletionBlock:(CompletionBlock)completionBlock;
 - (void)fetchRepositoriesWithCompletionRepositoriesBlock:(CompletionRepositoriesBlock)completionRepositoriesBlock;
 - (void)fetchSubscribersAtPath:(NSString *) path withCompletionSubscribersBlock:(CompletionSubscribersBlock)completionSubscribersBlock;
 @end

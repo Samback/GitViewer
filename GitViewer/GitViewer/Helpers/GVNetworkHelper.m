@@ -6,20 +6,26 @@
 //  Copyright © 2015 Max Tymchiy. All rights reserved.
 //
 
+
+
 #import "GVNetworkHelper.h"
-#import "GVHelper.h"
-#import  "NSObject+AccessToken.h"
-#import <AFNetworking/AFNetworking.h>
+
 #import "Repository.h"
 #import "Subscriber.h"
 
+#import "GVHelper.h"
+#import "GVKeyChain.h"
+
+#import "NSObject+AccessToken.h"
+
+
+#import <AFNetworking/AFNetworking.h>
 
 static NSString *const kTokenPath = @"https://github.com/login/oauth/access_token";
 static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
 
 @interface GVNetworkHelper ()
-@property (nonatomic, readwrite) NSString *accessToken;
-@property (nonatomic, strong)  AFHTTPRequestOperationManager *manager;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @end
 
 @implementation GVNetworkHelper
@@ -47,8 +53,9 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
 }
 
 //https://developer.github.com/v3/oauth/#github-redirects-back-to-your-site
-- (void)fetchOAuthTokenForCode:(NSString *)code withCompletionBlock:(CompletionBlock)completionBlock
+- (void)fetchOAuthTokenWithCompletionBlock:(CompletionBlock)completionBlock
 {
+    NSString *code = [GVKeyChain sharedManager].code;
     if (code) {
         NSDictionary *parameters = @{@"client_id" : kClientID,
                                      @"client_secret" : kClientSecretID,
@@ -56,20 +63,31 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
         
         [self.manager POST:kTokenPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
-            self.accessToken = [responseObject fetchAuthTokenFromDictionary];
+            [GVKeyChain sharedManager].accessToken = [responseObject fetchAuthTokenFromDictionary];
             completionBlock(nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
+            [GVKeyChain sharedManager].accessToken = nil;
             completionBlock(error);
         }];
+    }
+}
+
+- (void)updateAuthorizationHeader
+{
+    NSString *accessToken = [GVKeyChain sharedManager].accessToken;
+    if (accessToken) {
+        NSString *tokenValue = [@"token " stringByAppendingString:accessToken];
+        [self.manager.requestSerializer setValue:tokenValue forHTTPHeaderField:@"Authorization"];
+    } else {
+        [self.manager.requestSerializer clearAuthorizationHeader];
     }
 }
 
 //https://developer.github.com/v3/oauth/#scopes
 - (void)fetchRepositoriesWithCompletionRepositoriesBlock:(CompletionRepositoriesBlock)completionRepositoriesBlock
 {
-    NSString *tokenValue = [@"token " stringByAppendingString:self.accessToken];
-    [self.manager.requestSerializer setValue:tokenValue forHTTPHeaderField:@"Authorization"];
+    [self updateAuthorizationHeader];
     [self.manager GET:kUserReposPath
            parameters:nil
               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

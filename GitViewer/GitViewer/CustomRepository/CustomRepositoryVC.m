@@ -62,12 +62,6 @@ static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
     self.tableView.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
