@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		345741AE1BE7EFD600EC9BA5 /* GVHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741AD1BE7EFD600EC9BA5 /* GVHelper.m */; settings = {ASSET_TAGS = (); }; };
 		345741B21BE7F48300EC9BA5 /* UserRepositoriesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B11BE7F48300EC9BA5 /* UserRepositoriesVC.m */; settings = {ASSET_TAGS = (); }; };
+		345741B51BE7F98D00EC9BA5 /* GVNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B41BE7F98D00EC9BA5 /* GVNetworkHelper.m */; settings = {ASSET_TAGS = (); }; };
+		345741BA1BE8024D00EC9BA5 /* NSURL+CodeFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B91BE8024D00EC9BA5 /* NSURL+CodeFetch.m */; settings = {ASSET_TAGS = (); }; };
+		345741BD1BE802AA00EC9BA5 /* NSObject+AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741BC1BE802AA00EC9BA5 /* NSObject+AccessToken.m */; settings = {ASSET_TAGS = (); }; };
 		34BAED541BE78E7000E47894 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BAED531BE78E7000E47894 /* main.m */; };
 		34BAED571BE78E7000E47894 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BAED561BE78E7000E47894 /* AppDelegate.m */; };
 		34BAED5D1BE78E7000E47894 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34BAED5B1BE78E7000E47894 /* Main.storyboard */; };
@@ -35,6 +38,12 @@
 		345741AD1BE7EFD600EC9BA5 /* GVHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GVHelper.m; path = Helpers/GVHelper.m; sourceTree = "<group>"; };
 		345741B01BE7F48300EC9BA5 /* UserRepositoriesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserRepositoriesVC.h; path = Repositories/UserRepositoriesVC.h; sourceTree = "<group>"; };
 		345741B11BE7F48300EC9BA5 /* UserRepositoriesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserRepositoriesVC.m; path = Repositories/UserRepositoriesVC.m; sourceTree = "<group>"; };
+		345741B31BE7F98D00EC9BA5 /* GVNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GVNetworkHelper.h; path = Helpers/GVNetworkHelper.h; sourceTree = "<group>"; };
+		345741B41BE7F98D00EC9BA5 /* GVNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GVNetworkHelper.m; path = Helpers/GVNetworkHelper.m; sourceTree = "<group>"; };
+		345741B81BE8024D00EC9BA5 /* NSURL+CodeFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+CodeFetch.h"; path = "Categories/NSURL+CodeFetch.h"; sourceTree = "<group>"; };
+		345741B91BE8024D00EC9BA5 /* NSURL+CodeFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+CodeFetch.m"; path = "Categories/NSURL+CodeFetch.m"; sourceTree = "<group>"; };
+		345741BB1BE802AA00EC9BA5 /* NSObject+AccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+AccessToken.h"; path = "Categories/NSObject+AccessToken.h"; sourceTree = "<group>"; };
+		345741BC1BE802AA00EC9BA5 /* NSObject+AccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+AccessToken.m"; path = "Categories/NSObject+AccessToken.m"; sourceTree = "<group>"; };
 		34BAED4F1BE78E7000E47894 /* GitViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34BAED531BE78E7000E47894 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		34BAED551BE78E7000E47894 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -85,6 +94,28 @@
 			name = Repositories;
 			sourceTree = "<group>";
 		};
+		345741B61BE801AB00EC9BA5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				345741AC1BE7EFD600EC9BA5 /* GVHelper.h */,
+				345741AD1BE7EFD600EC9BA5 /* GVHelper.m */,
+				345741B31BE7F98D00EC9BA5 /* GVNetworkHelper.h */,
+				345741B41BE7F98D00EC9BA5 /* GVNetworkHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		345741B71BE801B600EC9BA5 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				345741B81BE8024D00EC9BA5 /* NSURL+CodeFetch.h */,
+				345741B91BE8024D00EC9BA5 /* NSURL+CodeFetch.m */,
+				345741BB1BE802AA00EC9BA5 /* NSObject+AccessToken.h */,
+				345741BC1BE802AA00EC9BA5 /* NSObject+AccessToken.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		34BAED461BE78E7000E47894 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +139,8 @@
 		34BAED511BE78E7000E47894 /* GitViewer */ = {
 			isa = PBXGroup;
 			children = (
+				345741B71BE801B600EC9BA5 /* Categories */,
+				345741B61BE801AB00EC9BA5 /* Helpers */,
 				345741AF1BE7F44800EC9BA5 /* Repositories */,
 				34BAED551BE78E7000E47894 /* AppDelegate.h */,
 				34BAED561BE78E7000E47894 /* AppDelegate.m */,
@@ -116,8 +149,6 @@
 				34BAED601BE78E7000E47894 /* LaunchScreen.storyboard */,
 				34BAED631BE78E7000E47894 /* Info.plist */,
 				34BAED521BE78E7000E47894 /* Supporting Files */,
-				345741AC1BE7EFD600EC9BA5 /* GVHelper.h */,
-				345741AD1BE7EFD600EC9BA5 /* GVHelper.m */,
 			);
 			path = GitViewer;
 			sourceTree = "<group>";
@@ -301,8 +332,11 @@
 			files = (
 				34BAED571BE78E7000E47894 /* AppDelegate.m in Sources */,
 				345741AE1BE7EFD600EC9BA5 /* GVHelper.m in Sources */,
+				345741BA1BE8024D00EC9BA5 /* NSURL+CodeFetch.m in Sources */,
 				34BAED541BE78E7000E47894 /* main.m in Sources */,
 				345741B21BE7F48300EC9BA5 /* UserRepositoriesVC.m in Sources */,
+				345741B51BE7F98D00EC9BA5 /* GVNetworkHelper.m in Sources */,
+				345741BD1BE802AA00EC9BA5 /* NSObject+AccessToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
