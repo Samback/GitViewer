@@ -17,6 +17,8 @@
 
 #import "NSURL+CodeFetch.h"
 #import "UITableView+ConfigurateSeparator.h"
+#import "UIColor+AppColorLegend.h"
+#import "NSArray+IndexPathsArray.h"
 
 #import "DGActivityIndicatorView.h"
 
@@ -26,7 +28,11 @@ static  NSString *repositoryCellIdentifier = @"RepositoryCell";
 static  NSString *sCustomRepositoryVCSegue = @"CustomRepositoryVCSegue";
 static  CGFloat repositoryCellHeight = 58.0;
 
-@interface UserRepositoriesVC () <UITableViewDataSource, UITableViewDelegate>
+@interface UserRepositoriesVC () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+{
+    NSInteger page;
+    BOOL reachedEnd;
+}
 @property (nonatomic, strong) NSArray<Repository*> *repositories;
 
 
@@ -48,19 +54,27 @@ static  CGFloat repositoryCellHeight = 58.0;
 {
     NSMutableArray *updatedRepositories = [NSMutableArray arrayWithArray:self.repositories];
     [updatedRepositories addObjectsFromArray:repositories];
+    NSInteger startRow = self.repositories.count;
     self.repositories = [updatedRepositories copy];
     self.tableView.hidden = NO;
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    
+    NSArray *indexPaths = [NSArray arryOfIndexesStartedAtRow:startRow withCount:repositories.count];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
 }
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    page = 1;
+    reachedEnd = NO;
     
     if (![GVKeyChain sharedManager].accessToken) {
         [GVHelper callForInitialAuthorizeAtGitHub];
     } else {
-        [self startSpinnerAnimation];
         [self fetchRepositories];
     }
     
@@ -106,10 +120,20 @@ static  CGFloat repositoryCellHeight = 58.0;
 
 - (void)fetchRepositories
 {
+    if (reachedEnd) {
+        return;
+    }
+    
+    [self startSpinnerAnimation];
     UserRepositoriesVC *__weak weakSelf = self;
-    [[GVNetworkHelper sharedManager] fetchRepositoriesWithCompletionRepositoriesBlock:^(NSArray<Repository *> *repositories, NSError *error) {
+    [[GVNetworkHelper sharedManager] fetchRepositoriesAtPage:page withCompletionRepositoriesBlock:^(NSArray<Repository *> *repositories, NSError *error) {
         if (!error) {
             [weakSelf addObjectsAtRepositoriesFromArray:repositories];
+            if (repositories.count == 20) {
+                page ++;
+            } else {
+                reachedEnd = YES;
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf stopSpinnerAnimation];
             });
@@ -121,7 +145,7 @@ static  CGFloat repositoryCellHeight = 58.0;
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles: nil] show];
                     [weakSelf stopSpinnerAnimation];
-            });           
+            });
         }
     }];
 }
@@ -137,7 +161,8 @@ static  CGFloat repositoryCellHeight = 58.0;
     return self.repositories.count;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [tableView configurateSeparatorForCell:cell];
     if ([cell isKindOfClass:[RepositoryCell class]]) {
         [(RepositoryCell *)cell fillCellWithInfo:[self.repositories objectAtIndex:indexPath.row]];
@@ -148,6 +173,17 @@ static  CGFloat repositoryCellHeight = 58.0;
 {
     RepositoryCell *cell =  (RepositoryCell *)[tableView dequeueReusableCellWithIdentifier:repositoryCellIdentifier];
     return cell;
+}
+
+
+#pragma mark - UIScrollView Delegate methods
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
+    if (bottomEdge >= scrollView.contentSize.height) {
+        [self fetchRepositories];
+    }
 }
 
 #pragma mark - Segue connection

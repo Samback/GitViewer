@@ -22,6 +22,6 @@ typedef void (^CompletionSubscribersBlock)(NSArray <Subscriber *> * subscribers,
 
 - (void)updateAuthorizationHeader;
 - (void)fetchOAuthTokenWithCompletionBlock:(CompletionBlock)completionBlock;
-- (void)fetchRepositoriesWithCompletionRepositoriesBlock:(CompletionRepositoriesBlock)completionRepositoriesBlock;
+- (void)fetchRepositoriesAtPage:(NSInteger)page withCompletionRepositoriesBlock:(CompletionRepositoriesBlock)completionRepositoriesBlock;
 - (void)fetchSubscribersAtPath:(NSString *) path withCompletionSubscribersBlock:(CompletionSubscribersBlock)completionSubscribersBlock;
 @end

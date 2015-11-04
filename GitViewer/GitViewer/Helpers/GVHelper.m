@@ -26,5 +26,4 @@ NSString *const nRecivedCodeAfterLoginNotification = @"StartAuthentificationProc
     }
 }
 
-
 @end

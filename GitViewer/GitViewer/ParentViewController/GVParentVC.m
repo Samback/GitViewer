@@ -8,6 +8,7 @@
 
 #import "GVParentVC.h"
 #import <DGActivityIndicatorView/DGActivityIndicatorView.h>
+#import "UIColor+AppColorLegend.h"
 
 @interface GVParentVC ()<UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,7 +22,7 @@
 {
     if (!_spinnerView) {
         DGActivityIndicatorView *activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeBallScaleRippleMultiple
-                                                                                             tintColor:[UIColor orangeColor]];
+                                                                                             tintColor:[UIColor appMainColor]];
         CGFloat length = 50;
         
         activityIndicatorView.frame = CGRectMake((self.view.bounds.size.width - length)/2 , (self.view.bounds.size.height - length)/2, length, length);
