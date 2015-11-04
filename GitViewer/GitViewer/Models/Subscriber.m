@@ -7,6 +7,7 @@
 //
 
 #import "Subscriber.h"
+#import "NSObject+UNNIL.h"
 
 @interface Subscriber ()
 @property (nonatomic, readwrite, copy) NSString *name;
@@ -31,8 +32,8 @@
 {
     Subscriber *subscriber = [[Subscriber alloc] init];
     if (subscriber && dictionary) {
-        subscriber.name = dictionary[@"login"];
-        subscriber.ownerAvatarPath = dictionary[@"avatar_url"];
+        subscriber.name = [dictionary[@"login"] unnilObject];
+        subscriber.ownerAvatarPath = [dictionary[@"avatar_url"] unnilObject];
         return subscriber;
     }
     return nil;

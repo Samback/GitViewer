@@ -8,6 +8,8 @@
 
 #import "Repository.h"
 
+#import "NSObject+UNNIL.h"
+
 @interface Repository ()
 
 @property (nonatomic, readwrite, copy) NSString *name;
@@ -35,11 +37,11 @@
 {
     Repository *repository = [[Repository alloc] init];
     if (repository && dictionary) {
-        repository.name = dictionary[@"name"];
-        repository.repositoryDescription = dictionary[@"description"];
-        repository.ownerAvatarPath = dictionary[@"owner"][@"avatar_url"];
-        repository.forksCount = dictionary[@"forks_count"];
-        repository.subscribersURL = dictionary[@"subscribers_url"];
+        repository.name = [dictionary[@"name"] unnilObject];
+        repository.repositoryDescription = [dictionary[@"description"] unnilObject];
+        repository.ownerAvatarPath = [dictionary[@"owner"][@"avatar_url"] unnilObject];
+        repository.forksCount = [dictionary[@"forks_count"] unnilObject];
+        repository.subscribersURL = [dictionary[@"subscribers_url"] unnilObject];
         return repository;
     }
     return nil;
