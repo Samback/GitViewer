@@ -60,6 +60,7 @@ static  CGFloat repositoryCellHeight = 58.0;
     if (![GVKeyChain sharedManager].accessToken) {
         [GVHelper callForInitialAuthorizeAtGitHub];
     } else {
+        [self startSpinnerAnimation];
         [self fetchRepositories];
     }
     
@@ -84,10 +85,21 @@ static  CGFloat repositoryCellHeight = 58.0;
         [GVHelper callForInitialAuthorizeAtGitHub];
         return;
     }
+    [self startSpinnerAnimation];
     UserRepositoriesVC *__weak weakSelf = self;
     [[GVNetworkHelper sharedManager] fetchOAuthTokenWithCompletionBlock:^(NSError *error) {
         if (!error) {
             [weakSelf fetchRepositories];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[[UIAlertView alloc] initWithTitle:@"Warning"
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles: nil] show];
+                [weakSelf stopSpinnerAnimation];
+            });
+            
         }
     }];
 }
@@ -98,6 +110,9 @@ static  CGFloat repositoryCellHeight = 58.0;
     [[GVNetworkHelper sharedManager] fetchRepositoriesWithCompletionRepositoriesBlock:^(NSArray<Repository *> *repositories, NSError *error) {
         if (!error) {
             [weakSelf addObjectsAtRepositoriesFromArray:repositories];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf stopSpinnerAnimation];
+            });
         } else if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[[UIAlertView alloc] initWithTitle:@"Warning"
@@ -105,6 +120,7 @@ static  CGFloat repositoryCellHeight = 58.0;
                                            delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles: nil] show];
+                    [weakSelf stopSpinnerAnimation];
             });           
         }
     }];

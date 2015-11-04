@@ -11,6 +11,6 @@
 @interface GVParentVC : UIViewController
 @property (nonatomic, readonly, weak) UITableView *tableView;
 
-- (void)startAnimation;
-- (void)stopAnimation;
+- (void)startSpinnerAnimation;
+- (void)stopSpinnerAnimation;
 @end

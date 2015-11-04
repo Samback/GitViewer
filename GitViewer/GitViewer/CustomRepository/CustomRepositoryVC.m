@@ -38,7 +38,11 @@ static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
     self.subscribersPath = path;
     CustomRepositoryVC *__weak weakSelf = self;
     self.title = name;
-    self.tableView.hidden = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+                       self.tableView.hidden = YES;
+                   });
+
+    [self startSpinnerAnimation];
     self.fetchOperation =
     [[AFHTTPRequestOperationManager manager]
      GET:path
@@ -47,10 +51,19 @@ static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
          weakSelf.subscribers = [Subscriber fetchSubscribersArrayFromJSON:responseObject];
          dispatch_async(dispatch_get_main_queue(), ^{
              weakSelf.navigationItem.prompt = [NSString stringWithFormat:@"Subscribers [%lu]", (unsigned long)weakSelf.subscribers.count];
+             [weakSelf stopSpinnerAnimation];
+             self.tableView.hidden = NO;
          });
         
      } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-         NSLog(@"Error %@", error);
+         dispatch_async(dispatch_get_main_queue(), ^{
+            [[[UIAlertView alloc]initWithTitle:@"Warning"
+                                      message:error.localizedDescription
+                                     delegate:nil
+                            cancelButtonTitle:@"OK"
+                             otherButtonTitles: nil] show];
+             [weakSelf stopSpinnerAnimation];
+         });
      }];
 }
 
