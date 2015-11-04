@@ -106,11 +106,7 @@ static  CGFloat repositoryCellHeight = 58.0;
             [weakSelf fetchRepositories];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[[UIAlertView alloc] initWithTitle:@"Warning"
-                                            message:error.localizedDescription
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles: nil] show];
+                [GVHelper showAlertBasedOnError:error];
                 [weakSelf stopSpinnerAnimation];
             });
             
@@ -129,7 +125,7 @@ static  CGFloat repositoryCellHeight = 58.0;
     [[GVNetworkHelper sharedManager] fetchRepositoriesAtPage:page withCompletionRepositoriesBlock:^(NSArray<Repository *> *repositories, NSError *error) {
         if (!error) {
             [weakSelf addObjectsAtRepositoriesFromArray:repositories];
-            if (repositories.count == 20) {
+            if (repositories.count == kPageSize) {
                 page ++;
             } else {
                 reachedEnd = YES;
@@ -139,12 +135,8 @@ static  CGFloat repositoryCellHeight = 58.0;
             });
         } else if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[[UIAlertView alloc] initWithTitle:@"Warning"
-                                            message:error.localizedDescription
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles: nil] show];
-                    [weakSelf stopSpinnerAnimation];
+                [GVHelper showAlertBasedOnError:error];
+                [weakSelf stopSpinnerAnimation];
             });
         }
     }];

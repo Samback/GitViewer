@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *const nRecivedCodeAfterLoginNotification;
-
+extern NSInteger const kPageSize;
 @interface GVHelper : NSObject
 + (void)callForInitialAuthorizeAtGitHub;
++ (void)showAlertBasedOnError:(NSError *)error;
 @end

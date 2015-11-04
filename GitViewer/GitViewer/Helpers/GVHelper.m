@@ -11,6 +11,7 @@
 #import "GVKeyChain.h"
 
 NSString *const nRecivedCodeAfterLoginNotification = @"StartAuthentificationProcess";
+NSInteger const kPageSize = 20;
 
 @implementation GVHelper
 + (void)callForInitialAuthorizeAtGitHub
@@ -26,4 +27,13 @@ NSString *const nRecivedCodeAfterLoginNotification = @"StartAuthentificationProc
     }
 }
 
+
++ (void)showAlertBasedOnError:(NSError *)error
+{
+    [[[UIAlertView alloc] initWithTitle:@"Warning"
+                                message:error.localizedDescription
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles: nil] show];
+}
 @end

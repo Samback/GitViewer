@@ -89,10 +89,10 @@ static NSString *const kUserReposPath = @"https://api.github.com/user/repos";
 //https://developer.github.com/v3/oauth/#scopes
 - (void)fetchRepositoriesAtPage:(NSInteger)page withCompletionRepositoriesBlock:(CompletionRepositoriesBlock)completionRepositoriesBlock;
 {
-    NSString *valuesPath = [NSString stringWithFormat:@"?page=%ld&per_page=20", (long)page];
-    NSString *pathShowFirst100Repos = [kUserReposPath stringByAppendingString:valuesPath];
+    NSString *valuesPath = [NSString stringWithFormat:@"?page=%ld&per_page=%ld", (long)page, kPageSize];
+    NSString *pathNewRepos = [kUserReposPath stringByAppendingString:valuesPath];
     [self updateAuthorizationHeader];
-    [self.manager GET:pathShowFirst100Repos
+    [self.manager GET:pathNewRepos
            parameters:nil
               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                   completionRepositoriesBlock([Repository fetchRepositoriesArrayFromJSON:responseObject], nil);

@@ -10,6 +10,7 @@
 #import "Subscriber.h"
 #import <AFNetworking/AFNetworking.h>
 #import "UITableView+ConfigurateSeparator.h"
+#import "GVHelper.h"
 
 
 static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
@@ -57,11 +58,7 @@ static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
         
      } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
          dispatch_async(dispatch_get_main_queue(), ^{
-            [[[UIAlertView alloc]initWithTitle:@"Warning"
-                                      message:error.localizedDescription
-                                     delegate:nil
-                            cancelButtonTitle:@"OK"
-                             otherButtonTitles: nil] show];
+             [GVHelper showAlertBasedOnError:error];
              [weakSelf stopSpinnerAnimation];
          });
      }];

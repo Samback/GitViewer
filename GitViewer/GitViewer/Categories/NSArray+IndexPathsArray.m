@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @implementation NSArray (IndexPathsArray)
+
 + (NSArray *)arryOfIndexesStartedAtRow:(NSUInteger)startRow withCount:(NSInteger)count
 {
     NSMutableArray *indexes = @[].mutableCopy;
