@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GVParentVC.h"
 
-@interface CustomRepositoryVC : UIViewController
+@interface CustomRepositoryVC : GVParentVC
 - (void)configurateVCWithName:(NSString *)name
          usingSubscribersPath:(NSString *)path;
 

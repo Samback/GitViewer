@@ -17,7 +17,6 @@ static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
 @property (nonatomic, copy) NSString *repositoryName;
 @property (nonatomic, copy) NSString *subscribersPath;
 @property (nonatomic, strong) AFHTTPRequestOperation *fetchOperation;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray <Subscriber *> *subscribers;
 @end
 
@@ -70,11 +69,6 @@ static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
 }
 
 #pragma mark - UITableViewDelegate
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GVParentVC.h"
 
-@interface UserRepositoriesVC : UIViewController
+@interface UserRepositoriesVC : GVParentVC
 
 @end

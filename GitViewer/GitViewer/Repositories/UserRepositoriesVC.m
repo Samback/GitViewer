@@ -18,13 +18,17 @@
 #import "NSURL+CodeFetch.h"
 #import "UITableView+ConfigurateSeparator.h"
 
+#import "DGActivityIndicatorView.h"
+
+#import "GVParentVC.h"
+
 static  NSString *repositoryCellIdentifier = @"RepositoryCell";
 static  NSString *sCustomRepositoryVCSegue = @"CustomRepositoryVCSegue";
 static  CGFloat repositoryCellHeight = 58.0;
 
 @interface UserRepositoriesVC () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSArray<Repository*> *repositories;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 @end
 
@@ -110,11 +114,6 @@ static  CGFloat repositoryCellHeight = 58.0;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return repositoryCellHeight;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

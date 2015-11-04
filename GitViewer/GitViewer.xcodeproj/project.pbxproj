@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		343CFB211BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CFB201BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m */; settings = {ASSET_TAGS = (); }; };
-		343CFB241BE9577B00FEC954 /* GVKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CFB231BE9577B00FEC954 /* GVKeyChain.m */; settings = {ASSET_TAGS = (); }; };
-		345741AE1BE7EFD600EC9BA5 /* GVHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741AD1BE7EFD600EC9BA5 /* GVHelper.m */; settings = {ASSET_TAGS = (); }; };
-		345741B21BE7F48300EC9BA5 /* UserRepositoriesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B11BE7F48300EC9BA5 /* UserRepositoriesVC.m */; settings = {ASSET_TAGS = (); }; };
-		345741B51BE7F98D00EC9BA5 /* GVNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B41BE7F98D00EC9BA5 /* GVNetworkHelper.m */; settings = {ASSET_TAGS = (); }; };
-		345741BA1BE8024D00EC9BA5 /* NSURL+CodeFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B91BE8024D00EC9BA5 /* NSURL+CodeFetch.m */; settings = {ASSET_TAGS = (); }; };
-		345741BD1BE802AA00EC9BA5 /* NSObject+AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741BC1BE802AA00EC9BA5 /* NSObject+AccessToken.m */; settings = {ASSET_TAGS = (); }; };
-		345741C01BE8C7A000EC9BA5 /* Repository.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741BF1BE8C7A000EC9BA5 /* Repository.m */; settings = {ASSET_TAGS = (); }; };
-		345741C41BE8DD5F00EC9BA5 /* Subscriber.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741C31BE8DD5F00EC9BA5 /* Subscriber.m */; settings = {ASSET_TAGS = (); }; };
-		345741C81BE8EA2B00EC9BA5 /* RepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741C71BE8EA2B00EC9BA5 /* RepositoryCell.m */; settings = {ASSET_TAGS = (); }; };
-		345741CF1BE8FFA700EC9BA5 /* CustomRepositoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741CE1BE8FFA700EC9BA5 /* CustomRepositoryVC.m */; settings = {ASSET_TAGS = (); }; };
+		343CFB211BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CFB201BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m */; };
+		343CFB241BE9577B00FEC954 /* GVKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 343CFB231BE9577B00FEC954 /* GVKeyChain.m */; };
+		3456A0A31BE988630008C670 /* GVParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3456A0A21BE988630008C670 /* GVParentVC.m */; };
+		345741AE1BE7EFD600EC9BA5 /* GVHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741AD1BE7EFD600EC9BA5 /* GVHelper.m */; };
+		345741B21BE7F48300EC9BA5 /* UserRepositoriesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B11BE7F48300EC9BA5 /* UserRepositoriesVC.m */; };
+		345741B51BE7F98D00EC9BA5 /* GVNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B41BE7F98D00EC9BA5 /* GVNetworkHelper.m */; };
+		345741BA1BE8024D00EC9BA5 /* NSURL+CodeFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741B91BE8024D00EC9BA5 /* NSURL+CodeFetch.m */; };
+		345741BD1BE802AA00EC9BA5 /* NSObject+AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741BC1BE802AA00EC9BA5 /* NSObject+AccessToken.m */; };
+		345741C01BE8C7A000EC9BA5 /* Repository.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741BF1BE8C7A000EC9BA5 /* Repository.m */; };
+		345741C41BE8DD5F00EC9BA5 /* Subscriber.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741C31BE8DD5F00EC9BA5 /* Subscriber.m */; };
+		345741C81BE8EA2B00EC9BA5 /* RepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741C71BE8EA2B00EC9BA5 /* RepositoryCell.m */; };
+		345741CF1BE8FFA700EC9BA5 /* CustomRepositoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 345741CE1BE8FFA700EC9BA5 /* CustomRepositoryVC.m */; };
 		34BAED541BE78E7000E47894 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BAED531BE78E7000E47894 /* main.m */; };
 		34BAED571BE78E7000E47894 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BAED561BE78E7000E47894 /* AppDelegate.m */; };
 		34BAED5D1BE78E7000E47894 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34BAED5B1BE78E7000E47894 /* Main.storyboard */; };
@@ -44,6 +45,8 @@
 		343CFB201BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+ConfigurateSeparator.m"; path = "Categories/UITableView+ConfigurateSeparator.m"; sourceTree = "<group>"; };
 		343CFB221BE9577B00FEC954 /* GVKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GVKeyChain.h; path = Helpers/GVKeyChain.h; sourceTree = "<group>"; };
 		343CFB231BE9577B00FEC954 /* GVKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GVKeyChain.m; path = Helpers/GVKeyChain.m; sourceTree = "<group>"; };
+		3456A0A11BE988630008C670 /* GVParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GVParentVC.h; path = ParentViewController/GVParentVC.h; sourceTree = "<group>"; };
+		3456A0A21BE988630008C670 /* GVParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GVParentVC.m; path = ParentViewController/GVParentVC.m; sourceTree = "<group>"; };
 		345741AC1BE7EFD600EC9BA5 /* GVHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GVHelper.h; path = Helpers/GVHelper.h; sourceTree = "<group>"; };
 		345741AD1BE7EFD600EC9BA5 /* GVHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GVHelper.m; path = Helpers/GVHelper.m; sourceTree = "<group>"; };
 		345741B01BE7F48300EC9BA5 /* UserRepositoriesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserRepositoriesVC.h; path = Repositories/UserRepositoriesVC.h; sourceTree = "<group>"; };
@@ -101,6 +104,15 @@
 				BFBB6B01578FE1EDEE2842B3 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3456A0A01BE9881E0008C670 /* ParentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3456A0A11BE988630008C670 /* GVParentVC.h */,
+				3456A0A21BE988630008C670 /* GVParentVC.m */,
+			);
+			name = ParentViewController;
 			sourceTree = "<group>";
 		};
 		345741AF1BE7F44800EC9BA5 /* Repositories */ = {
@@ -199,6 +211,7 @@
 		34BAED511BE78E7000E47894 /* GitViewer */ = {
 			isa = PBXGroup;
 			children = (
+				3456A0A01BE9881E0008C670 /* ParentViewController */,
 				345741C11BE8C7A800EC9BA5 /* Models */,
 				345741B71BE801B600EC9BA5 /* Categories */,
 				345741B61BE801AB00EC9BA5 /* Helpers */,
@@ -293,6 +306,7 @@
 				TargetAttributes = {
 					34BAED4E1BE78E7000E47894 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 2AUX883V6A;
 					};
 					34BAED671BE78E7000E47894 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -405,6 +419,7 @@
 				343CFB211BE90D6300FEC954 /* UITableView+ConfigurateSeparator.m in Sources */,
 				345741BD1BE802AA00EC9BA5 /* NSObject+AccessToken.m in Sources */,
 				345741C01BE8C7A000EC9BA5 /* Repository.m in Sources */,
+				3456A0A31BE988630008C670 /* GVParentVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,11 +548,14 @@
 			baseConfigurationReference = 2DD4BE7DC85EA4C4B2B09DAC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: samback@ukr.net (HT4DN8H652)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: samback@ukr.net (HT4DN8H652)";
 				INFOPLIST_FILE = GitViewer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.max.GitViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -546,11 +564,14 @@
 			baseConfigurationReference = 289301C9793B4C2669754D70 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GitViewer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.max.GitViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -558,10 +579,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GitViewerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.max.GitViewerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GitViewer.app/GitViewer";
 			};
 			name = Debug;
@@ -574,6 +597,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.max.GitViewerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GitViewer.app/GitViewer";
 			};
 			name = Release;
