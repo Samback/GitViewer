@@ -48,15 +48,22 @@
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                               timeoutInterval:30.0];
-    RepositoryCell *__weak weakCell = self;
-    [self.ownerView setImageWithURLRequest:request
-                          placeholderImage:nil
-                                   success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-                                       weakCell.ownerView.image = image;
-                                       [weakCell setNeedsLayout];
-                                   } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-                                       
-                                   }];
+    UIImage *image = [[UIImageView sharedImageCache] cachedImageForRequest:request];
+    if (image) {
+        self.ownerView.image = image;
+    } else {
+        RepositoryCell *__weak weakCell = self;
+        [self.ownerView
+         setImageWithURLRequest:request
+         placeholderImage:nil
+         success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+             weakCell.ownerView.image = image;
+             [weakCell setNeedsLayout];
+         } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+             
+         }];
+    }
+   
 }
 
 
