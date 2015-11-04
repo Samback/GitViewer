@@ -12,7 +12,7 @@
 
 + (UIColor *)appMainColor
 {
-    return [UIColor orangeColor];
+    return [UIColor lightGrayColor];
 }
 
 @end
