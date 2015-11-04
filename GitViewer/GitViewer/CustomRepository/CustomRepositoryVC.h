@@ -12,6 +12,4 @@
 @interface CustomRepositoryVC : GVParentVC
 - (void)configurateVCWithName:(NSString *)name
          usingSubscribersPath:(NSString *)path;
-
-
 @end

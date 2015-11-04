@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+AccessToken.h"
+
 static NSString *const kAccessToken = @"access_token";
 
 @implementation NSObject (AccessToken)
@@ -24,6 +25,7 @@ static NSString *const kAccessToken = @"access_token";
     }
     return nil;
 }
+
 - (NSString *)fetchAuthTokenFromDictionary
 {
     if ([self isKindOfClass:[NSDictionary class]]) {
@@ -34,4 +36,5 @@ static NSString *const kAccessToken = @"access_token";
     }
     return nil;
 }
+
 @end

@@ -63,7 +63,6 @@ static NSString * const kCodeTokenKey = @"codeTokenKey";
     return nil;
 }
 
-
 - (void)setCode:(NSString *)code
 {
     self.keychain[kCodeTokenKey] = code;
@@ -73,6 +72,5 @@ static NSString * const kCodeTokenKey = @"codeTokenKey";
 {
     return self.keychain[kCodeTokenKey];
 }
-
 
 @end

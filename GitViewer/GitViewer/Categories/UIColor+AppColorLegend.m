@@ -9,8 +9,10 @@
 #import "UIColor+AppColorLegend.h"
 
 @implementation UIColor (AppColorLegend)
+
 + (UIColor *)appMainColor
 {
     return [UIColor orangeColor];
 }
+
 @end

@@ -189,18 +189,10 @@
 		345741C91BE8FF3300EC9BA5 /* CustomRepository */ = {
 			isa = PBXGroup;
 			children = (
-				345741D31BE90AB100EC9BA5 /* Cells */,
 				345741CD1BE8FFA700EC9BA5 /* CustomRepositoryVC.h */,
 				345741CE1BE8FFA700EC9BA5 /* CustomRepositoryVC.m */,
 			);
 			name = CustomRepository;
-			sourceTree = "<group>";
-		};
-		345741D31BE90AB100EC9BA5 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 		34BAED461BE78E7000E47894 = {

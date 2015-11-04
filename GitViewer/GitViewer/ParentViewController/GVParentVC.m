@@ -38,17 +38,20 @@
     self.spinnerView.hidden = NO;
     [self.spinnerView startAnimating];
 }
+
 - (void)stopSpinnerAnimation
 {
     self.spinnerView.hidden = YES;
     [self.spinnerView stopAnimating];
 }
 
-#pragma mark - 
+#pragma mark - UITableViewDelegate methods
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 0;

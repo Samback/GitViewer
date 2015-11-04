@@ -9,6 +9,7 @@
 #import "UITableView+ConfigurateSeparator.h"
 
 @implementation UITableView (ConfigurateSeparator)
+
 - (void)configurateSeparatorForCell:(UITableViewCell *)cell
 {
     if ([self respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -23,4 +24,5 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
+
 @end

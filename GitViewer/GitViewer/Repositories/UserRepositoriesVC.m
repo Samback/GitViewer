@@ -33,8 +33,8 @@ static  CGFloat repositoryCellHeight = 58.0;
     NSInteger page;
     BOOL reachedEnd;
 }
-@property (nonatomic, strong) NSArray<Repository*> *repositories;
 
+@property (nonatomic, strong) NSArray<Repository*> *repositories;
 
 @end
 
@@ -65,12 +65,13 @@ static  CGFloat repositoryCellHeight = 58.0;
 }
 
 
+#pragma mark - Life cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    page = 1;
-    reachedEnd = NO;
+
+    [self configurationsSetUp];
     
     if (![GVKeyChain sharedManager].accessToken) {
         [GVHelper callForInitialAuthorizeAtGitHub];
@@ -82,11 +83,19 @@ static  CGFloat repositoryCellHeight = 58.0;
                                              selector:@selector(recivedNotificationWithCode:)
                                                  name:nRecivedCodeAfterLoginNotification
                                                object:nil];
+   
+}
+
+#pragma mark - Logic part
+
+- (void)configurationsSetUp
+{
+    page = 1;
+    reachedEnd = NO;
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.hidden = YES;
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)recivedNotificationWithCode:(NSNotification *)notification
@@ -143,6 +152,7 @@ static  CGFloat repositoryCellHeight = 58.0;
 }
 
 #pragma mark - UITableViewDelegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return repositoryCellHeight;
@@ -189,7 +199,6 @@ static  CGFloat repositoryCellHeight = 58.0;
         [customRepositoryVC configurateVCWithName:repository.name
                              usingSubscribersPath:repository.subscribersURL];
     }
-    
 }
 
 #pragma mark - Memory Part

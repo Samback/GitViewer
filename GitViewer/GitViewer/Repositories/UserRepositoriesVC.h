@@ -10,5 +10,4 @@
 #import "GVParentVC.h"
 
 @interface UserRepositoriesVC : GVParentVC
-
 @end

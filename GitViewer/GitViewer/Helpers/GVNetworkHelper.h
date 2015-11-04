@@ -24,4 +24,5 @@ typedef void (^CompletionSubscribersBlock)(NSArray <Subscriber *> * subscribers,
 - (void)fetchOAuthTokenWithCompletionBlock:(CompletionBlock)completionBlock;
 - (void)fetchRepositoriesAtPage:(NSInteger)page withCompletionRepositoriesBlock:(CompletionRepositoriesBlock)completionRepositoriesBlock;
 - (void)fetchSubscribersAtPath:(NSString *) path withCompletionSubscribersBlock:(CompletionSubscribersBlock)completionSubscribersBlock;
+
 @end

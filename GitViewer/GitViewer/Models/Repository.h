@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface Repository : NSObject
-
 @property (nonatomic, readonly, copy) NSString *name;
 @property (nonatomic, readonly, copy) NSString *repositoryDescription;
 @property (nonatomic, readonly, copy) NSString *ownerAvatarPath;

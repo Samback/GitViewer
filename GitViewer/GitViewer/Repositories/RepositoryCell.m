@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *ownerView;
 @property (weak, nonatomic) IBOutlet UILabel *nameAndForksTitle;
 @property (weak, nonatomic) IBOutlet UILabel *repositoryDescription;
-
 @end
 
 @implementation RepositoryCell
@@ -63,8 +62,6 @@
              
          }];
     }
-   
 }
-
 
 @end

@@ -12,8 +12,8 @@
 #import "UITableView+ConfigurateSeparator.h"
 #import "GVHelper.h"
 
-
 static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
+
 @interface CustomRepositoryVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, copy) NSString *repositoryName;
 @property (nonatomic, copy) NSString *subscribersPath;
@@ -23,6 +23,7 @@ static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
 
 @implementation CustomRepositoryVC
 
+#pragma mark - Lazy instantiation
 
 - (void)setSubscribers:(NSArray <Subscriber *> *)subscribers
 {
@@ -63,6 +64,8 @@ static NSString * const  kSubscriberCellIdentifier = @"SubscriberCell";
          });
      }];
 }
+
+#pragma mark - LifeCycle
 
 - (void)viewDidLoad
 {

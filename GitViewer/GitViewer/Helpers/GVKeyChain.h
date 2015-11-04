@@ -16,4 +16,5 @@
 @property (nonatomic, readonly) NSString *clientSecretID;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSString *code;
+
 @end

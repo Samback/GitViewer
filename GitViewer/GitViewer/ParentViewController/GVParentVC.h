@@ -13,4 +13,5 @@
 
 - (void)startSpinnerAnimation;
 - (void)stopSpinnerAnimation;
+
 @end

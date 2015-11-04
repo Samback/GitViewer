@@ -9,6 +9,7 @@
 #import "NSObject+UNNIL.h"
 
 @implementation NSObject (UNNIL)
+
 - (instancetype)unnilObject
 {
     if ([self isKindOfClass:[NSNull class]]) {
@@ -16,4 +17,5 @@
     }
     return self;
 }
+
 @end

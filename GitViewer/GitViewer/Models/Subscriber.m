@@ -15,6 +15,7 @@
 @end
 
 @implementation Subscriber
+
 + (NSArray <Subscriber *> *)fetchSubscribersArrayFromJSON:(id)json
 {
     NSMutableArray *subscribers = @[].mutableCopy;

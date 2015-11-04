@@ -21,6 +21,7 @@
 @end
 
 @implementation Repository
+
 + (NSArray <Repository *> *)fetchRepositoriesArrayFromJSON:(id)json;
 {
     NSMutableArray *repositories = @[].mutableCopy;

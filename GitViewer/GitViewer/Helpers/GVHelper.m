@@ -14,6 +14,7 @@ NSString *const nRecivedCodeAfterLoginNotification = @"StartAuthentificationProc
 NSInteger const kPageSize = 20;
 
 @implementation GVHelper
+
 + (void)callForInitialAuthorizeAtGitHub
 {
     [GVKeyChain sharedManager].code = nil;
@@ -36,4 +37,5 @@ NSInteger const kPageSize = 20;
                       cancelButtonTitle:@"OK"
                       otherButtonTitles: nil] show];
 }
+
 @end
